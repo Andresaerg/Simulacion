@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulación de Sistemas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 align="center">El Problema del Ebrio</h1>
+    <h2 align="center">Presentado por Andrés Rosales 26.638.537</h2>
+    <div align="center">
+        <button onclick="start()">Iniciar Simulación</button>
+        <table>
+            <tr>
+                <td align="center"><div class="results1"></div>
+            </tr>
+            <tr>
+                <td align="center"><div class="results2"></div>
+            </tr>
+                <td align="center"><div class="results3"></div>
+            </tr>
+                <td align="center"><div class="results4"></div>
+            </tr>
+                <td align="center"><div class="results5"></div>
+            </tr>
+                <td align="center"><div class="results6"></div>
+            </tr>
+                <td align="center"><div class="results7"></div>
+            </tr>
+                <td align="center"><div class="results8"></div>
+            </tr>
+                <td align="center"><div class="results9"></div>
+            </tr>
+                <td align="center"><div class="results10"></div>
+            </tr>
+                <td align="center"><div class="resultsf"></div>
+            </tr>
+            </tr>
+                <td align="center"><div class="resultsfp"></div>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
+
+<script>
+    /*
+    Desarrollar  una aplicación que permita resolver el problema del EBRIO, puede ser programada en cualquier lenguaje de programación o herramienta
+    informatica que este a su disposición. Se debera remitir el codigo fuente y un archivo ejecutable de la misma.
+
+    Supongamos que un ebrio está parado en una esquina, cuando decide caminar para que le pase el efecto “ya ustedes saben cuál”.
+    Supongamos que existe una probabilidad igual de que se dirija al norte, sur, este u oeste al llegar a cada esquina. Si camina 10 calles,
+    ¿Cuál es la probabilidad de que termine su recorrido a dos calles de donde lo empezó?
+
+    El proyecto es Grupal maximo 2 integrantes, quien lo desee realizar solo o en pareja no hay ningún problema.
+ */ 
+
+// Datos a tomar en cuenta: 
+// Norte, Sur, Este, Wester = 1/4 para c/u, es decir = 0.25; en rands
+// sería para Norte = 0-24 ; Este = 25-49; Sur = 50-74; Wester = 75-99.
+// Posteriormente hacer la función caminar para mostrar el recorrido, luego
+// ejecutar varios intentos estilo "Monte Carlo" y así obtener la probabilidad variable en función a los recorridos
+// la probabilidad fija sería en base a las posibles combinaciones en el plano X,Y; "nPc": P = 4 / nPc + 1 (punto de origen).
+
+function start(){
+
+    var posicionX = 0;
+    var posicionY = 0;
+    var probabilidad = 4 / 111;
+    var monteCarlo = 0;
+    var probabilidadV;
+    var contador = 1;
+
+    for(var i=1; i<=10; i++){
+        var caminata = Math.floor(Math.random() * 100);
+        if(caminata==0 || caminata<=24){
+            posicionY++;
+            document.querySelector(".results"+i).innerHTML = "<br>El borracho caminó "+i+" calle(s) hacia el norte, posición actual : ("+posicionX+","+posicionY+")";
+        }
+        else if(caminata>24 && caminata<=49){
+            posicionX++;
+            document.querySelector(".results"+i).innerHTML = "<br>El borracho caminó "+i+" calle(s) hacia el este, posición actual : ("+posicionX+","+posicionY+")";
+        }
+        else if(caminata>49 && caminata<=74){
+            posicionY--;
+            document.querySelector(".results"+i).innerHTML = "<br>El borracho caminó "+i+" calle(s) hacia el sur, posición actual : ("+posicionX+","+posicionY+")";
+        }
+        else if(caminata>74 && caminata<=99){
+            posicionX--;
+            document.querySelector(".results"+i).innerHTML = "<br>El borracho caminó "+i+" calle(s) hacia el oeste, posición actual : ("+posicionX+","+posicionY+")";
+        }
+    }    
+    document.querySelector(".resultsf").innerHTML = "<br>El borracho terminó su trayecto en la posición: ("+posicionX+","+posicionY+") <br>La probabilidad estática de que el borracho terminase a 2 calles del inicio es de "+probabilidad+"%";
+    if((posicionX == 2 && posicionY == 0) || (posicionX == -2 && posicionY == 0)
+    || (posicionY == 2 && posicionX == 0) || (posicionY == -2 && posicionX == 0)){
+        monteCarlo += 1;
+        probabilidadV = 100 / contador;
+        document.querySelector(".resultsf").innerHTML = "<br>El borracho terminó su trayecto en la posición: ("+posicionX+","+posicionY+") <br>La probabilidad estática de que el borracho terminase a 2 calles del inicio es de "+probabilidad+"%";
+        document.querySelector(".resultsfp").innerHTML = "La probabilidad variable de que el borracho terminase a 2 calles del inicio es de "+probabilidadV+"%";
+    }
+
+    // Monte Carlo:
+    else{
+
+        while(monteCarlo == 0){
+            posicionX = 0;
+            posicionY = 0;
+
+            for(var j=1; j<=10; j++){
+                var caminata = Math.floor(Math.random() * 100);
+                if(caminata==0 || caminata<=24){
+                    posicionY++;
+                }
+                else if(caminata>24 && caminata<=49){
+                    posicionX++;
+                }
+                else if(caminata>49 && caminata<=74){
+                    posicionY--;
+                }
+                else if(caminata>74 && caminata<=99){
+                    posicionX--;
+                }
+                contador += 1;
+                console.log("Intento "+contador+"("+posicionX+","+posicionY+")");
+            }
+            if((posicionX == 2 && posicionY == 0) || (posicionX == -2 && posicionY == 0)
+            || (posicionY == 2 && posicionX == 0) || (posicionY == -2 && posicionX == 0)){
+                monteCarlo += 1;
+                probabilidadV = 100 / contador;
+                document.querySelector(".resultsfp").innerHTML = "La probabilidad variable de que el borracho terminase a 2 calles del inicio es de "+probabilidadV+"%";
+            }
+        }
+    }
+}
+
+</script>
