@@ -5,19 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulación de Sistemas</title>
-    <link rel="stylesheet" type="style/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/800px-Unofficial_JavaScript_logo_2.svg.png" type="image/x-icon">
-    <style>
-        *{
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-            font-size: 15px;
-        }
-    </style>
 </head>
 <body>
-    <h1 align="center">El Problema del Ebrio</h1>
-    <h2 align="center">Presentado por Andrés Rosales 26.638.537</h2>
-    <div align="center">
+    <div class="container1">
+        <h1>El Problema del Ebrio</h1>
+        <h2>Presentado por Andrés Rosales 26.638.537</h2>
+    </div>
+    <div class="container2">
         <button onclick="start()">Iniciar Simulación</button>
         <table>
             <tr>
@@ -101,11 +97,13 @@ function start(){
     }    
     document.querySelector(".resultsf").innerHTML = "<br><strong>El borracho terminó su trayecto en la posición: <span style='color:green'>("+posicionX+","+posicionY+")</span> <br>La probabilidad estática de que el borracho terminase a 2 calles del inicio es de "+probabilidad+"%</strong>";
     if((posicionX == 2 && posicionY == 0) || (posicionX == -2 && posicionY == 0)
-    || (posicionY == 2 && posicionX == 0) || (posicionY == -2 && posicionX == 0)){
+    || (posicionY == 2 && posicionX == 0) || (posicionY == -2 && posicionX == 0)
+    || (posicionX == 1 && posicionY == 1) || (posicionX == -1 && posicionY == -1)
+    || (posicionY == -1 && posicionX == 1) || (posicionY == 1 && posicionX == -1)){
         monteCarlo += 1;
         probabilidadV = 100 / contador;
         document.querySelector(".resultsf").innerHTML = "<br><strong>El borracho terminó su trayecto en la posición: <span style='color:green'>("+posicionX+","+posicionY+")</span> <br>La probabilidad estática de que el borracho terminase a 2 calles del inicio es de "+probabilidad+"%</strong>";
-        document.querySelector(".resultsfp").innerHTML = "<strong>La probabilidad variable de que el borracho terminase a 2 calles del inicio en base a sus movimientos es: "+probabilidadV+"%</strong>";
+        document.querySelector(".resultsfp").innerHTML = "<strong>La probabilidad variable de que el borracho terminase a 2 calles del inicio en base a sus movimientos es: "+probabilidadV+"% en "+contador+" intento</strong>";
     }
 
     // Monte Carlo:
@@ -134,13 +132,15 @@ function start(){
             console.log("Intento "+contador+"("+posicionX+","+posicionY+")");
 
             if((posicionX == 2 && posicionY == 0) || (posicionX == -2 && posicionY == 0)
-            || (posicionY == 2 && posicionX == 0) || (posicionY == -2 && posicionX == 0)){
+            || (posicionY == 2 && posicionX == 0) || (posicionY == -2 && posicionX == 0)
+            || (posicionX == 1 && posicionY == 1) || (posicionX == -1 && posicionY == -1)
+            || (posicionY == -1 && posicionX == 1) || (posicionY == 1 && posicionX == -1)){
                 monteCarlo += 1;
                 probabilidadV = 100 / contador;
-                document.querySelector(".resultsfp").innerHTML = "<strong>La probabilidad variable de que el borracho terminase a 2 calles del inicio en base a sus movimientos es: "+probabilidadV+"%</strong>";
+                document.querySelector(".resultsfp").innerHTML = "<strong>La probabilidad variable de que el borracho terminase a 2 calles del inicio en base a sus movimientos es: "+probabilidadV+"% y esto le tomaría "+contador+" intentos</strong>";
             }
         }
     }
 }
 
-</script>
+    </script>
