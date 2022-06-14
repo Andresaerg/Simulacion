@@ -17,7 +17,6 @@ h1{
     border-left: 5px solid blue;
     border-radius: 4px;
     padding: 5px;
-    width: fit-content;
     margin: auto;
     text-align: center;
     margin-bottom: 10px;
@@ -29,8 +28,6 @@ h1{
     border-left: 5px solid darkred;
     border-radius: 4px;
     padding: 30px;
-    width: fit-content;
-    margin: auto;
     text-align: center;
     margin-bottom: 10px;
     margin-top: 20px;
@@ -44,6 +41,7 @@ h1{
     color: white;
     width: 175px;
     height: 40px;
+    transition: 250ms;
 }
 
 .container2 button:hover{
@@ -55,5 +53,30 @@ h1{
     background-color: #4169E1;
     cursor: pointer;
     border: #1E90FF 1px solid;
-    box-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
+    box-shadow: 0 0 30px rgba(0, 191, 255, 0.5);
+}
+
+table{
+    border: rgba(0, 191, 255, 0.5) 1px solid;
+    background-color: #F1F1F1;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+tr:nth-child(even){
+    background-color: rgba(65, 105, 225, 0.4);
+}
+
+table th{
+    background-color: rgba(30, 164, 31, 0.9);
+    color: white;
+    text-align: center;
+    padding-bottom: 12px;
+    padding-top: 12px;
+}
+
+td{
+    border: 1px solid #ddd;
+    padding: 8px;
+    line-height: 20px;
 }
